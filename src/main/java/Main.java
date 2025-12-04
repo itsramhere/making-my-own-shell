@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 
-    private static String[] validCommands = {"echo", "exit", "type", "pwd"};
+    private static String[] validCommands = {"echo", "exit", "type", "pwd", "cd"};
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -15,13 +15,16 @@ public class Main {
                 break;
             }
 
-            if(line.equals("pwd")){
+            else if(line.equals("pwd")){
                 pwdFunction();
                 continue;
             }
+            
+           
 
             String[] parts = line.trim().split(" ");
             
+
             if (parts.length == 0 || parts[0].isEmpty()) {
                 continue;
             }
@@ -32,6 +35,10 @@ public class Main {
                     System.out.print(parts[i]);
                 }
                 System.out.print("\n");
+            }
+
+            else if(parts[0].equals("cd")){
+                cdFunction(parts);
             }
 
             else if(parts[0].equals("type")){
@@ -118,4 +125,16 @@ public class Main {
     public static void pwdFunction(){
         System.out.println(System.getProperty("user.dir"));
     }
+
+    public static void cdFunction(String[] s){
+        File file = new File(System.getProperty("user.dir"));
+        ProcessBuilder pb = new ProcessBuilder(s);
+        pb.directory(file);
+
+        File newDir = new File(file, s[1]);
+        file = newDir.getAbsoluteFile();
+
+        pb.directory(file);
+    }
 }
+
