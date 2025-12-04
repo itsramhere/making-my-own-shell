@@ -5,6 +5,8 @@ public class Main {
 
     private static String[] validCommands = {"echo", "exit", "type", "pwd", "cd"};
 
+    private static File currentDirectory = new File(System.getProperty("user.dir"));
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -109,13 +111,10 @@ public class Main {
     public static void executeFunction(String[] s){
         try {
             ProcessBuilder p = new ProcessBuilder(s);
-            p.inheritIO();
-            
-           
+            p.directory(currentDirectory);
+            p.inheritIO();           
             Process process = p.start();
             process.waitFor();
-
-
             
         } catch (IOException | InterruptedException e) {
             System.out.println("Error: " + e.getMessage());
@@ -123,18 +122,24 @@ public class Main {
     }
 
     public static void pwdFunction(){
-        System.out.println(System.getProperty("user.dir"));
+        System.out.println(currentDirectory.getAbsolutePath());
+
     }
 
     public static void cdFunction(String[] s){
-        File file = new File(System.getProperty("user.dir"));
-        ProcessBuilder pb = new ProcessBuilder(s);
-        pb.directory(file);
+            File targetDir = new File(s[1]);
 
-        File newDir = new File(file, s[1]);
-        file = newDir.getAbsoluteFile();
+   
+    if (!targetDir.isAbsolute()) {
+        targetDir = new File(currentDirectory, s[1]);
+    }
 
-        pb.directory(file);
+    if (targetDir.exists() && targetDir.isDirectory()) {
+        currentDirectory = targetDir.getAbsoluteFile();
+    } else {
+        System.out.println("cd: no such file or directory: " + s[1]);
+    }
+
     }
 }
 
