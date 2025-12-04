@@ -1,7 +1,9 @@
+import java.io.File;
 import java.util.*;
 
 public class Main {
 
+    private static String[] validCommands = {"echo", "exit", "type"};
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -31,13 +33,26 @@ public class Main {
     }
 
     public static void typeFunction(String s){
-        String[] validCommands = {"echo", "exit", "type"};
         for(String command : validCommands){
             if(command.equals(s)){
                 System.out.println(s+ " is a shell builtin");
                 return;
             }
         }
+
+        String path = System.getenv("PATH");
+        String[] directories = path.split(";");
+
+        for (String dir : directories) {
+            File file = new File(dir, command);
+            if (file.exists()) {
+                if (file.canExecute()) {
+                    System.out.println(command + " is " + file.getAbsolutePath());
+                    return;
+                }
+            }
+        }
+
 
         System.out.println(s +": not found");
     }
