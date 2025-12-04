@@ -130,7 +130,7 @@ public class Main {
     public static void cdFunction(String[] s){
 
     if(s[1].equals("~")){
-        File homeDir = new File(System.getProperty("user.home"));
+        File homeDir = new File(System.getProperty("user.dir")).getAbsoluteFile();
         currentDirectory = homeDir.getAbsoluteFile();
         return;
 
