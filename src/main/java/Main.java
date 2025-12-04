@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
@@ -39,7 +40,7 @@ public class Main {
                 System.out.print("\n");
             }
 
-            else if(parts[0].equals("cd")){
+            else if(parts[0].equals("cd") ){
                 cdFunction(parts);
             }
 
@@ -127,19 +128,20 @@ public class Main {
     }
 
     public static void cdFunction(String[] s){
-            File targetDir = new File(s[1]);
+    
+    Path current = currentDirectory.toPath();
+    Path newPath = current.resolve(s[1]).normalize().toAbsolutePath();
 
-   
-    if (!targetDir.isAbsolute()) {
-        targetDir = new File(currentDirectory, s[1]);
+    File targetDir = newPath.toFile();
+    if(targetDir.exists() && targetDir.isDirectory()){
+        currentDirectory = targetDir;
+    }     
+    else{
+    System.out.println("Directory does not exist");
     }
 
-    if (targetDir.exists() && targetDir.isDirectory()) {
-        currentDirectory = targetDir.getAbsoluteFile();
-    } else {
-        System.out.println("cd: no such file or directory: " + s[1]);
     }
 
-    }
+    
 }
 
