@@ -137,7 +137,7 @@ public class Main {
         currentDirectory = targetDir;
     }     
     else{
-    System.out.println("Directory does not exist");
+    System.out.println("cd: "+s[1] +": No such file or directory");
     }
 
     }
