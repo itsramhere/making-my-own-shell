@@ -128,6 +128,13 @@ public class Main {
     }
 
     public static void cdFunction(String[] s){
+
+    if(s[1].equals("~")){
+        File homeDir = new File(System.getProperty("user.home"));
+        currentDirectory = homeDir.getAbsoluteFile();
+        return;
+
+    }
     
     Path current = currentDirectory.toPath();
     Path newPath = current.resolve(s[1]).normalize().toAbsolutePath();
