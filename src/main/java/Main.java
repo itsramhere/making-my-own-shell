@@ -14,6 +14,7 @@ public class Main {
                 for(int i=1; i<parts.length; i++){
                     System.out.print(parts[i] + " ");
                 }
+                System.out.print("\n");
             }
     
         }
