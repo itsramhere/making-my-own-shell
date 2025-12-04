@@ -45,7 +45,7 @@ public class Main {
 
             for (String dir : directories) {
                 File file = new File(dir, s[1]);
-                if (file.exists()) {
+                if (file.isFile()) {
                     System.out.println(s[1] + " is " + file.getAbsolutePath());
                     return;
                 }
@@ -53,6 +53,6 @@ public class Main {
 
 
 
-        System.out.println(s +": not found");
+        System.out.println(s[1] +": not found");
     }
 }
