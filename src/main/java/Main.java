@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.*;
+import java.io.IOException;
 
 public class Main {
 
@@ -19,8 +20,13 @@ public class Main {
                 }
                 System.out.print("\n");
             }
+
             else if(parts[0].equals("type")){
                 typeFunction(parts);
+            }
+
+            else if(validFunction(s)){
+                executeFunction(s);
             }
 
             else{
@@ -50,9 +56,40 @@ public class Main {
                     return;
                 }
     }
-
-
-
         System.out.println(s[1] +": not found");
     }
-}
+
+    private boolean validFunction(String[] s){
+        String cmd = s[0];
+
+        for(String command : validCommands){
+            if(command.equals(cmd)){
+                return true;
+            }
+        }
+            String path = System.getenv("PATH");
+            String[] directories = path.split(File.pathSeparator);
+
+            for (String dir : directories) {
+                File file = new File(dir, s[1]);
+                if (file.isFile() && file.canExecute()) {
+                    return true;
+                }
+    }
+        return false;
+    }
+
+    public static void executeFunction(String [] s){
+        try{
+        ProcessBuilder p = new ProcessBuilder(s);
+        p.inheritIO();
+        Process process = p.start;
+        process.waitFor();
+        }
+
+        catch(Exception e){
+            System.out.println(e.printStackTrace());
+        }
+
+    }
+    }
