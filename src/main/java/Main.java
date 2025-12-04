@@ -44,10 +44,10 @@ public class Main {
         String[] directories = path.split(";");
 
         for (String dir : directories) {
-            File file = new File(dir, command);
+            File file = new File(dir, s);
             if (file.exists()) {
                 if (file.canExecute()) {
-                    System.out.println(command + " is " + file.getAbsolutePath());
+                    System.out.println(s + " is " + file.getAbsolutePath());
                     return;
                 }
             }
