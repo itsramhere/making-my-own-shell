@@ -25,8 +25,8 @@ public class Main {
                 typeFunction(parts);
             }
 
-            else if(validFunction(s)){
-                executeFunction(s);
+            else if(validFunction(parts)){
+                executeFunction(parts);
             }
 
             else{
@@ -59,7 +59,7 @@ public class Main {
         System.out.println(s[1] +": not found");
     }
 
-    private boolean validFunction(String[] s){
+    private static boolean validFunction(String[] s){
         String cmd = s[0];
 
         for(String command : validCommands){
