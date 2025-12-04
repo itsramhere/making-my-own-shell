@@ -31,7 +31,7 @@ public class Main {
     }
 
     public static void typeFunction(String s){
-        String[] validCommands = {"echo", "exit"};
+        String[] validCommands = {"echo", "exit", "type"};
         for(String command : validCommands){
             if(command.equals(s)){
                 System.out.println(s+ " is a shell builtin");
