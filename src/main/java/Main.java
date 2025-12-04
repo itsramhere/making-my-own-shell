@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+        int x
         while (true) {
             System.out.print("$ ");
             String line = sc.nextLine();
@@ -53,7 +53,6 @@ public class Main {
         String target = s[1]; 
 
         for(String command : validCommands){
-            int test =0 
             if(command.equals(target)){
                 System.out.println(target + " is a shell builtin");
                 return;
