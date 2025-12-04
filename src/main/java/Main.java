@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 
-    private static String[] validCommands = {"echo", "exit", "type"};
+    private static String[] validCommands = {"echo", "exit", "type", "pwd"};
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
