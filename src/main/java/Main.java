@@ -15,7 +15,7 @@ public class Main {
                     System.out.print(parts[i] + " ");
                 }
             }
-            System.out.println(line +": command not found");
+    
         }
         sc.close();
     }
