@@ -7,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int x
         while (true) {
             System.out.print("$ ");
             String line = sc.nextLine();
