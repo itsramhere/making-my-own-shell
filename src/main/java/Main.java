@@ -15,6 +15,11 @@ public class Main {
                 break;
             }
 
+            if(line.equals("pwd")){
+                pwdFunction();
+                continue;
+            }
+
             String[] parts = line.trim().split(" ");
             
             if (parts.length == 0 || parts[0].isEmpty()) {
@@ -108,5 +113,9 @@ public class Main {
         } catch (IOException | InterruptedException e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public static void pwdFunction(){
+        System.out.println(System.getProperty("user.dir"));
     }
 }
