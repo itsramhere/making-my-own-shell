@@ -20,7 +20,7 @@ public class Main {
                 System.out.print("\n");
             }
             else if(parts[0].equals("type")){
-                typeFunction(parts[1]);
+                typeFunction(parts);
             }
 
             else{
@@ -32,24 +32,25 @@ public class Main {
         sc.close();
     }
 
-    public static void typeFunction(String s){
+    public static void typeFunction(String[] s){
         for(String command : validCommands){
-            if(command.equals(s)){
-                System.out.println(s+ " is a shell builtin");
+            if(command.equals(s[1])){
+                System.out.println(s[1]+ " is a shell builtin");
                 return;
             }
         }
 
-        String path = System.getenv("PATH");
-        String[] directories = path.split(";");
+            String path = System.getenv("PATH");
+            String[] directories = path.split(File.pathSeparator);
 
-        for (String dir : directories) {
-            File file = new File(dir, s);
-            if (file.exists()) {
-                System.out.println(s + " is " + file.getAbsolutePath());
-                return;
-            }
-        }
+            for (String dir : directories) {
+                File file = new File(dir, s[1]);
+                if (file.exists()) {
+                    System.out.println(s[1] + " is " + file.getAbsolutePath());
+                    return;
+                }
+    }
+
 
 
         System.out.println(s +": not found");
